@@ -16,6 +16,9 @@ else {
     $request_data = file_get_contents('php://input');
     $form_array = json_decode($request_data, true);
 
+    //validate the info
+    
+
     $message = "";
     foreach($form_array as $input) {
         $message .= $input['name'] . "\n";
