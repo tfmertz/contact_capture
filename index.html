@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Contact Capture Demo</title>
+  </head>
+  <body>
+    <h1>Contact Capture Demo</h1>
+    <form id="form1" action="index.html" method="post">
+      <label>First
+        <input type="text" name="first" value="">
+      </label>
+      <label>Last
+        <input type="text" name="last" value="">
+      </label>
+      <label>Phone
+        <input type="phone" name="phone" value="">
+      </label>
+      <button type="submit" name="submit">Submit</button>
+    </form>
+    <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+    <script src="contact_capture.js"></script>
+    <script type="text/javascript">
+      $(document).ready(function() {
+        $('#form1').watchForAbandon( ['stuff'] );
+      });
+    </script>
+  </body>
+</html>
