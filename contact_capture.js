@@ -19,46 +19,29 @@ $.fn.watchForAbandon = function( required_fields ) {
       }
     }
     if(haveParams)
-    console.log("We have input!");
+      console.log("We have required fields!");
   } else {
     console.log("No Required fields.");
   }
 
   //listener to check if we submitted the form
-  $form.submit(function(e) {
-    e.preventDefault();
-    //if we didn't we don't need to do our abandonment stuff
+  $form.submit(function() {
+    //if we submitted we don't need to do our abandonment stuff
     isSubmitted = true;
-
-    var form_array = $form.serializeArray();
-    console.log(form_array);
-    var message = "";
-    for( var i = 0; i < form_array.length; i++ ) {
-      message += "Name:  " + form_array[i].name;
-      message += "\nValue: " + form_array[i].value;
-      message += "\n\n";
-    }
-    alert("Message Sent!");
-    console.log(message);
-
-    $.ajax({
-      method: "POST",
-      contentType: "application/json; charset=utf-8",
-      url: "contact_capture_mail.php",
-      data: JSON.stringify(form_array),
-    })
-    .success(function(data) {
-      console.log("successful request: " + data);
-    });
-
   });
 
+  //before the page closes
   $(window).bind('beforeunload', function() {
     //if the form wasn't submitted
     if( ! isSubmitted ) {
 
-      console.log("Did things");
-
+      var form_array = $form.serializeArray();
+      $.ajax({
+        method: "POST",
+        contentType: "application/json; charset=utf-8",
+        url: "contact_capture_mail.php",
+        data: JSON.stringify(form_array),
+      });
     }
   });
   //for chaining

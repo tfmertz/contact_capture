@@ -12,6 +12,19 @@ else {
     //grab the info from the request
     $request_data = file_get_contents('php://input');
     $form_array = json_decode($request_data, true);
-    echo 'Successful request!';
-    file_put_contents('test1.txt', $form_array);
+
+    $message = "";
+    foreach($form_array as $input) {
+        $message .= $input['name'] . "\n";
+        $message .= $input['value'] . "\n";
+        $message .= "\n";
+    }
+    file_put_contents('test1.txt', $message);
+
+
+
+
+    // Sends a string back saying success
+    // (not needed they aren't on that page anymore)
+    // echo 'Successful request!';
 }
